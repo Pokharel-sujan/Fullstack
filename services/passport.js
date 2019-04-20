@@ -8,7 +8,7 @@ const keys = require("../config/keys");
 const User = mongoose.model('users');  // creating a user model
 
 passport.serializeUser((user, done)=>{
-    done(null, user.id);   // done is call back , user is mongoogle model instance
+    done(null, user.id);   // done is call back , user is mongoose model instance
 
 });
 
@@ -28,12 +28,13 @@ passport.use(
     },
     (accessToken, refreshToken, profile, done) => {
 
-        User.findOne({googleId: profileId}).then((existingUser) =>{
+        User.findOne({googleId: profile.id}).then((existingUser) =>{   // existing user is instance
                 if (existingUser){
                     //we already have a record with the given profile ID
                     done(null, existingUser);
                 } else{
                     //we don't have a user record with this ID, so make a new record
+                
                     new User({googleId : profile.id})
                     .save()
                     
@@ -41,8 +42,8 @@ passport.use(
                 }
 
             });
-    }
-  )
+        }
+     )
 );
 
 //promise 

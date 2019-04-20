@@ -10,7 +10,7 @@ require("./services/passport");
 
 
 
-//connceting to the moongoose database
+//connceting to the moongoose database 
 mongoose.connect(keys.mongoURI);
 
 const app = express();
