@@ -10,6 +10,10 @@ const surveySchema = new Schema({
     recipients : [RecipientSchema],
     yes:{type:Number, default:0},
     no:{type:Number, default:0},
+    _user: {type:Schema.Types.ObjectId,ref:'User'},
+    // _ referes to as reference field that sets up the relationship between a given schema and given user
+    dateSent: Date,
+    lastResponded: Date
 
 });
 
